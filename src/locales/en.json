@@ -1,0 +1,11 @@
+{
+	"Connecting to Discord...": "Connecting to Discord...",
+	"Lyna is now standing guard.": "Lyna is now standing guard.",
+	"Command executed: {{command}}": "Command executed: {{command}}",
+	"Sorry, there was an error when executing that command.": "Sorry, there was an error when executing that command.",
+	"Registered command: {{command}}": "Registered command: {{command}}",
+	"Registered command: {{command}} - {{bar}}": "Registered command: {{command}} - {{bar}}",
+	"Registered command: {{name}}": "Registered command: {{name}}",
+	"Registered commands: {{name}}": "Registered commands: {{name}}",
+	"Registered commands:": "Registered commands:"
+}
