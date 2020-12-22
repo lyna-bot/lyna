@@ -10,7 +10,7 @@ import { Command } from "./interfaces/command.js";
 const client = new Client();
 const commands: Collection<string, Command> = new Collection();
 
-const prefix = "!!";
+const prefix = process.env.COMMAND_PREFIX ?? "!!";
 
 /**
  * The main entry point for Lyna.
@@ -20,7 +20,7 @@ const prefix = "!!";
  *
  * @module
  */
-export default () => {
+export default (): void => {
   login();
   registerCommands();
 
@@ -59,7 +59,7 @@ const dispatchCommand = async (message: Message) => {
   if (!command || !commands.has(command)) return;
 
   try {
-    await commands.get(command).execute(message, args);
+    commands.get(command)?.execute(message, args);
 
     logger.verbose(
       i18n.__(`Command executed: {{command}}`, { command: command }),

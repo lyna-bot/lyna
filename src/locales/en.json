@@ -2,5 +2,7 @@
 	"Connecting to Discord...": "Connecting to Discord...",
 	"Lyna is now standing guard.": "Lyna is now standing guard.",
 	"Ping!": "Ping!",
-	"Registered commands:": "Registered commands:"
+	"Registered commands:": "Registered commands:",
+	"Pong.": "Pong.",
+	"Command executed: {{command}}": "Command executed: {{command}}"
 }
