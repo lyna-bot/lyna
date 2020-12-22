@@ -4,6 +4,9 @@
   "description": "A Discord.js bot for moderation, role management, and other admin tasks.",
   "main": "src/index.ts",
   "type": "module",
+  "engines": {
+    "node": "15.4.0"
+  },
   "scripts": {
     "start": "node --loader ts-node/esm --experimental-specifier-resolution=node .",
     "lint": "eslint .",
