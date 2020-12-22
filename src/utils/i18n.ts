@@ -6,7 +6,7 @@ const i18n = new I18n();
 i18n.configure({
   directory: path.join(
     path.dirname(new URL(import.meta.url).pathname),
-    "../../src/locales",
+    "../locales",
   ),
 });
 

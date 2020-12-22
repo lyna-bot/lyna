@@ -5,7 +5,7 @@
   "main": "src/index.ts",
   "type": "module",
   "scripts": {
-    "start": "node --loader ts-node/esm .",
+    "start": "node --loader ts-node/esm --experimental-specifier-resolution=node .",
     "lint": "eslint .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,6 +18,7 @@
     "dotenv": "8.2.0",
     "erlpack": "github:discord/erlpack",
     "i18n": "0.13.2",
+    "ts-node": "9.1.1",
     "winston": "3.3.3",
     "zlib-sync": "0.1.7"
   },
@@ -30,9 +31,7 @@
     "@typescript-eslint/parser": "^4.11.0",
     "eslint": "7.16.0",
     "eslint-config-prettier": "7.1.0",
-    "eslint-plugin-prettier": "3.3.0",
     "prettier": "2.2.1",
-    "ts-node": "9.1.1",
     "typescript": "^4.1.3"
   }
 }

@@ -1,11 +1,11 @@
 import { Client, Collection, Message } from "discord.js";
 import { oneLineCommaListsAnd } from "common-tags";
 
-import { logger } from "./utils/logger.js";
-import { i18n } from "./utils/i18n.js";
-import * as lynaCommands from "./commands/index.js";
+import { logger } from "./utils/logger";
+import { i18n } from "./utils/i18n";
+import * as lynaCommands from "./commands";
 
-import { Command } from "./interfaces/command.js";
+import { Command } from "./interfaces/command";
 
 const client = new Client();
 const commands: Collection<string, Command> = new Collection();
@@ -54,7 +54,7 @@ const dispatchCommand = async (message: Message) => {
   if (!message.content.startsWith(prefix) || message.author.bot) return;
 
   const args: string[] = getArgs(message);
-  const command: string = getCommandName(args);
+  const command: string | undefined = getCommandName(args);
 
   if (!command || !commands.has(command)) return;
 
@@ -74,7 +74,6 @@ const getArgs = (message: Message): string[] => {
   return message.content.slice(prefix.length).trim().split(/ +/);
 };
 
-const getCommandName = (args: string[]): string => {
-  const commandName: string = args.shift() ?? "";
-  return commandName?.toLowerCase();
+const getCommandName = (args: string[]): string | undefined => {
+  return args.shift()?.toLowerCase();
 };
