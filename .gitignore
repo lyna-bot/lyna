@@ -90,3 +90,6 @@ typings/
 
 # TypeScript output
 dist/
+
+# Fauna keys
+.faunarc
