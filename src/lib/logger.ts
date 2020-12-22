@@ -12,3 +12,9 @@ export const logger = winston.createLogger({
     ),
   ),
 });
+
+export const debug = winston.createLogger({
+  level: "verbose",
+  transports: [new winston.transports.Console()],
+  format: winston.format.combine(winston.format.prettyPrint()),
+});

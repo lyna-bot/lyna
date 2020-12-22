@@ -1,4 +1,5 @@
-import { i18n } from "../utils/i18n";
+import { i18n } from "../lib/i18n";
+
 import { Command } from "../interfaces/command";
 
 /**
@@ -11,9 +12,9 @@ import { Command } from "../interfaces/command";
  * Usage: {p}ping
  */
 export const Ping: Command = {
-  name: "ping",
+  trigger: "ping",
   description: i18n.__("Ping!"),
   async execute(message) {
-    await message.channel.send(i18n.__("Pong."));
+    await message.channel.send(i18n.__("Pong!"));
   },
 };

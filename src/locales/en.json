@@ -2,7 +2,11 @@
 	"Connecting to Discord...": "Connecting to Discord...",
 	"Lyna is now standing guard.": "Lyna is now standing guard.",
 	"Ping!": "Ping!",
+	"Pong!": "Pong!",
 	"Registered commands:": "Registered commands:",
-	"Pong.": "Pong.",
-	"Command executed: {{command}}": "Command executed: {{command}}"
+	"Command executed: {{command}}": "Command executed: {{command}}",
+	"Accepts a user into the community, giving them the roles they need to access the wider server.": "Accepts a user into the community, giving them the roles they need to access the wider server.",
+	"Displays a user's avatar.": "Displays a user's avatar.",
+	"Please mention the user whose avatar you wish to see.": "Please mention the user whose avatar you wish to see.",
+	"Command executed: {{ trigger }}": "Command executed: {{ trigger }}"
 }

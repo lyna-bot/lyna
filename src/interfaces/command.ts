@@ -1,11 +1,13 @@
 import { Message } from "discord.js";
 
+import { ArgumentList } from "./argument";
+
 export interface Command {
-  name: string;
+  trigger: string;
   description: string;
   execute: CommandFunc;
 }
 
 interface CommandFunc {
-  (message: Message, args?: string[]): Promise<void> | boolean | void;
+  (message: Message, args?: ArgumentList): Promise<Message | void> | void;
 }
