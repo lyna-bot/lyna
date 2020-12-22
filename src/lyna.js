@@ -15,6 +15,8 @@ const prefix = "!!";
  *
  * Here, we log into Discord and set up anything else the bot needs to run
  * globally, then start listening for commands.
+ *
+ * @module
  */
 export default () => {
   logger.info(i18n.__("Connecting to Discord..."));
@@ -28,7 +30,9 @@ export default () => {
     client.commands.set(command.name.toLowerCase(), command);
   });
   logger.verbose(
-    oneLineCommaListsAnd`${i18n.__("Registered commands:")} ${Object.keys(lynaCommands)}`,
+    oneLineCommaListsAnd`${i18n.__("Registered commands:")} ${Object.keys(
+      lynaCommands,
+    )}`,
   );
 
   client.on("message", (message) => {

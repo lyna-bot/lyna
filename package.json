@@ -1,7 +1,7 @@
 {
   "name": "lyna",
   "version": "2.0.0",
-  "description": "",
+  "description": "A Discord.js bot for moderation, role management, and other admin tasks.",
   "main": "src/index.js",
   "type": "module",
   "scripts": {
