@@ -2,10 +2,10 @@
   "name": "lyna",
   "version": "2.0.0",
   "description": "A Discord.js bot for moderation, role management, and other admin tasks.",
-  "main": "src/index.js",
+  "main": "src/index.ts",
   "type": "module",
   "scripts": {
-    "start": "node .",
+    "start": "tsc && node dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -21,6 +21,11 @@
     "zlib-sync": "0.1.7"
   },
   "devDependencies": {
-    "prettier": "2.2.1"
+    "@types/common-tags": "^1.8.0",
+    "@types/i18n": "^0.12.0",
+    "@types/node": "^14.14.14",
+    "@types/ws": "^7.4.0",
+    "prettier": "2.2.1",
+    "typescript": "^4.1.3"
   }
 }

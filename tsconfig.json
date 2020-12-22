@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "lib": ["es2020"],
+    "target": "ES2020",
+    "module": "es2020",
+    "moduleResolution": "node",
+    "incremental": true,
+
+    "strict": false,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true
+  }
+}
