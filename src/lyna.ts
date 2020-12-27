@@ -1,12 +1,11 @@
 import { Collection, Message } from "discord.js";
 import { oneLineCommaListsAnd } from "common-tags";
+import { readdir } from "fs/promises";
 
 import { ClientInstance, CommandPrefix } from "./lib/core";
 import { i18n } from "./lib/i18n";
-import { logger } from "./lib/logger";
+import { debug, logger } from "./lib/logger";
 import { parseArgs } from "./lib/arguments";
-
-import * as CommandDefinitions from "./commands";
 
 import { ArgumentList } from "./interfaces/argument";
 import { Command } from "./interfaces/command";
@@ -40,16 +39,26 @@ const login = () => {
 };
 
 const registerCommands = () => {
-  Object.entries(CommandDefinitions).forEach(([, cmd]) => {
-    commands.set(cmd.trigger.toLowerCase(), cmd);
-  });
+  const commandList = parseCommands();
+  // Object.entries(CommandDefinitions).forEach(([, cmd]) => {
+  //   commands.set(cmd.trigger.toLowerCase(), cmd);
+  // });
+  // logger.verbose(
+  //   oneLineCommaListsAnd`
+  //     ${i18n.__("Registered commands:")}
+  //     ${Object.keys(CommandDefinitions)}
+  //   `,
+  // );
+};
 
-  logger.verbose(
-    oneLineCommaListsAnd`
-      ${i18n.__("Registered commands:")}
-      ${Object.keys(CommandDefinitions)}
-    `,
-  );
+const parseCommands = async () => {
+  try {
+    const files = await readdir("./commands/");
+
+    debug.info(files);
+  } catch (error) {
+    logger.error(error);
+  }
 };
 
 const dispatchCommand = async (message: Message) => {
