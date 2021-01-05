@@ -1,10 +1,12 @@
 import { Collection, Message } from "discord.js";
+import { URL } from "url";
 import { oneLineCommaListsAnd } from "common-tags";
+import path from "path";
 import { readdir } from "fs/promises";
 
 import { ClientInstance, CommandPrefix } from "./lib/core";
-import { i18n } from "./lib/i18n";
 import { debug, logger } from "./lib/logger";
+import { i18n } from "./lib/i18n";
 import { parseArgs } from "./lib/arguments";
 
 import { ArgumentList } from "./interfaces/argument";
@@ -38,24 +40,34 @@ const login = () => {
   });
 };
 
-const registerCommands = () => {
-  const commandList = parseCommands();
-  // Object.entries(CommandDefinitions).forEach(([, cmd]) => {
-  //   commands.set(cmd.trigger.toLowerCase(), cmd);
-  // });
-  // logger.verbose(
-  //   oneLineCommaListsAnd`
-  //     ${i18n.__("Registered commands:")}
-  //     ${Object.keys(CommandDefinitions)}
-  //   `,
-  // );
-};
-
-const parseCommands = async () => {
+const registerCommands = async () => {
   try {
-    const files = await readdir("./commands/");
+    const lynaDir = path.dirname(new URL(import.meta.url).pathname);
+    const files = await readdir(path.join(lynaDir, "./commands/"));
+    const CommandRegex = /\.command\.(t|j)s$/;
 
-    debug.info(files);
+    const commandsLoaded = files.map((file) => {
+      if (CommandRegex.test(file)) {
+        return import(path.join(lynaDir, "./commands/", file))
+          .then((command) => {
+            const cmd = command.default;
+
+            commands.set(cmd.trigger.toLowerCase(), cmd);
+          })
+          .catch((error: string) => {
+            logger.error(`Error loading module ${file}: ${error}`);
+          });
+      }
+    });
+
+    Promise.all(commandsLoaded).then(() => {
+      logger.verbose(
+        oneLineCommaListsAnd`
+          ${i18n.__("Registered commands:")}
+          ${commands.keyArray()}
+        `,
+      );
+    });
   } catch (error) {
     logger.error(error);
   }

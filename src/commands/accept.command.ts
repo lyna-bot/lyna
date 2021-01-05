@@ -14,7 +14,7 @@ import { Command } from "../interfaces/command";
  *
  * Usage: {p}accept <user> <roles>
  */
-export const Accept: Command = {
+const Accept: Command = {
   trigger: "accept",
   description: i18n.__(oneLine`
     Accepts a user into the community, giving them the roles they
@@ -26,3 +26,5 @@ export const Accept: Command = {
     );
   },
 };
+
+export default Accept;

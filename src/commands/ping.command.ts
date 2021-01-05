@@ -11,10 +11,12 @@ import { Command } from "../interfaces/command";
  *
  * Usage: {p}ping
  */
-export const Ping: Command = {
+const Ping: Command = {
   trigger: "ping",
   description: i18n.__("Ping!"),
   async execute(message) {
     await message.channel.send(i18n.__("Pong!"));
   },
 };
+
+export default Ping;

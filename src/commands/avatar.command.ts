@@ -14,7 +14,7 @@ import { Command } from "../interfaces/command";
  *
  * Usage: {p}avatar <user>
  */
-export const Avatar: Command = {
+const Avatar: Command = {
   trigger: "avatar",
   description: i18n.__(oneLine`
     Displays a user's avatar.
@@ -41,3 +41,5 @@ export const Avatar: Command = {
     }
   },
 };
+
+export default Avatar;
