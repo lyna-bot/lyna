@@ -1,3 +1,3 @@
-export * from "./avatar";
-export * from "./accept";
-export * from "./ping";
+export * from "../commands/avatar.command";
+export * from "../commands/accept.command";
+export * from "../commands/ping.command";
