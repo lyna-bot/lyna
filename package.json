@@ -1,6 +1,6 @@
 {
   "name": "lyna",
-  "version": "2.0.0",
+  "version": "2.0.0-development",
   "description": "A Discord.js bot for moderation, role management, and other admin tasks.",
   "main": "src/index.ts",
   "type": "module",
@@ -38,7 +38,7 @@
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "7.19.0",
     "eslint-config-prettier": "7.2.0",
-    "husky": "^4.3.8",
+    "husky": "^5.0.8",
     "prettier": "2.2.1",
     "typescript": "^4.1.3"
   },
