@@ -4,8 +4,8 @@ import { ClientInstance, CommandPrefix } from "./core";
 
 import { Argument, ArgumentList } from "../interfaces/argument";
 
-export const parseArgs = (message: Message): ArgumentList => {
-  const rawArgs: string[] = getRawArgs(message);
+export const parseArguments = (message: Message): ArgumentList => {
+  const rawArgs: string[] = getRawArguments(message);
   const args: Argument[] = rawArgs.slice(1).map((arg: Argument) => {
     if (typeof arg === "string") {
       const userMention = getUserFromMention(arg);
@@ -21,7 +21,7 @@ export const parseArgs = (message: Message): ArgumentList => {
   };
 };
 
-export const getRawArgs = (message: Message): string[] => {
+export const getRawArguments = (message: Message): string[] => {
   return message.content.slice(CommandPrefix.length).trim().split(/ +/);
 };
 

@@ -1,17 +1,12 @@
-import { Collection, Message } from "discord.js";
+import { Message } from "discord.js";
 import { oneLineCommaListsAnd } from "common-tags";
 
-import { ClientInstance, CommandPrefix } from "./lib/core";
+import { ClientInstance, Modules } from "./lib/core";
+import { dispatchCommand } from "./lib/commands";
 import { i18n } from "./lib/i18n";
 import { logger } from "./lib/logger";
-import { parseArgs } from "./lib/arguments";
 
-import * as CommandDefinitions from "./commands";
-
-import { ArgumentList } from "./interfaces/argument";
-import { Command } from "./interfaces/command";
-
-const commands: Collection<string, Command> = new Collection();
+import * as ModuleDefinitions from "./modules";
 
 /**
  * The main entry point for Lyna.
@@ -23,7 +18,7 @@ const commands: Collection<string, Command> = new Collection();
  */
 export default (): void => {
   login();
-  registerCommands();
+  registerModules();
 
   ClientInstance.on("message", (message: Message) => {
     dispatchCommand(message);
@@ -39,34 +34,16 @@ const login = () => {
   });
 };
 
-const registerCommands = () => {
-  Object.entries(CommandDefinitions).forEach(([, cmd]) => {
-    commands.set(cmd.trigger.toLowerCase(), cmd);
+const registerModules = () => {
+  Object.entries(ModuleDefinitions).forEach(([, module]) => {
+    Modules.set(module.title, module);
+    module.init();
   });
 
   logger.verbose(
     oneLineCommaListsAnd`
-      ${i18n.__("Registered commands:")}
-      ${Object.keys(CommandDefinitions)}
+      ${i18n.__("Registered modules:")}
+      ${Modules.keyArray()}
     `,
   );
-};
-
-const dispatchCommand = async (message: Message) => {
-  if (!message.content.startsWith(CommandPrefix) || message.author.bot) return;
-
-  const args: ArgumentList = parseArgs(message);
-
-  if (!commands.has(args.trigger)) return;
-
-  try {
-    commands.get(args.trigger)?.execute(message, args);
-
-    logger.verbose(
-      i18n.__(`Command executed: {{ trigger }}`, { trigger: args.trigger }),
-    );
-  } catch (error) {
-    logger.error(error);
-    message.reply(i18n.__("there was an error when executing that command."));
-  }
 };

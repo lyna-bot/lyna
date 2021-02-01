@@ -1,12 +1,12 @@
 {
-	"Connecting to Discord...": "Connecting to Discord...",
-	"Lyna is now standing guard.": "Lyna is now standing guard.",
-	"Ping!": "Ping!",
-	"Pong!": "Pong!",
-	"Registered commands:": "Registered commands:",
-	"Command executed: {{command}}": "Command executed: {{command}}",
-	"Accepts a user into the community, giving them the roles they need to access the wider server.": "Accepts a user into the community, giving them the roles they need to access the wider server.",
 	"Displays a user's avatar.": "Displays a user's avatar.",
-	"Please mention the user whose avatar you wish to see.": "Please mention the user whose avatar you wish to see.",
+	"Ping!": "Ping!",
+	"Miscellaneous tools and functionality useful in the day-to-day operation of the bot.": "Miscellaneous tools and functionality useful in the day-to-day operation of the bot.",
+	"Accepts a user into the community, giving them the roles they need to access the wider server.": "Accepts a user into the community, giving them the roles they need to access the wider server.",
+	"A collection of tools to gate a community against bots, trolls, and other external threats.": "A collection of tools to gate a community against bots, trolls, and other external threats.",
+	"Connecting to Discord...": "Connecting to Discord...",
+	"Registered modules:": "Registered modules:",
+	"Lyna is now standing guard.": "Lyna is now standing guard.",
+	"Pong!": "Pong!",
 	"Command executed: {{ trigger }}": "Command executed: {{ trigger }}"
 }

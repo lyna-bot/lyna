@@ -1,9 +1,9 @@
 import { MessageEmbed, User } from "discord.js";
 import { oneLine } from "common-tags";
 
-import { i18n } from "../lib/i18n";
+import { i18n } from "../../../lib/i18n";
 
-import { Command } from "../interfaces/command";
+import { Command } from "../../../interfaces/command";
 
 /**
  * @module
