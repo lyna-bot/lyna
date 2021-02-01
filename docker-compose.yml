@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+  core:
+    image: "node:15.7-alpine"
+    user: "node"
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./:/home/node/app
+    command: "npm start"
