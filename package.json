@@ -1,5 +1,5 @@
 {
-  "name": "lyna",
+  "name": "@lyna-bot/core",
   "version": "2.0.0-development",
   "description": "A Discord.js bot for moderation, role management, and other admin tasks.",
   "main": "src/index.ts",
@@ -11,11 +11,16 @@
     "start": "node --loader ts-node/esm --experimental-specifier-resolution=node .",
     "lint": "eslint .",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "husky install"
+    "postinstall": "husky install",
+    "semantic-release": "semantic-release"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:lyna-bot/lyna.git"
+  },
   "dependencies": {
     "common-tags": "1.8.0",
     "discord.js": "12.5.1",
@@ -40,11 +45,18 @@
     "eslint-config-prettier": "7.2.0",
     "husky": "^5.0.8",
     "prettier": "2.2.1",
+    "semantic-release": "^17.3.7",
     "typescript": "^4.1.3"
   },
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "release": {
+    "branches": ["main"]
+  },
+  "publishConfig": {
+    "access": "restricted"
   }
 }
