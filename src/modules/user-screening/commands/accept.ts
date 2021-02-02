@@ -16,6 +16,7 @@ import { Command } from "../../../interfaces/command";
  */
 export const Accept: Command = {
   trigger: "accept",
+  usage: "<user> [arguments] [chosen roles]",
   description: i18n.__(oneLine`
     Accepts a user into the community, giving them the roles they
     need to access the wider server.

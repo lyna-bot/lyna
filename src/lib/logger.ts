@@ -16,5 +16,13 @@ export const logger = winston.createLogger({
 export const debug = winston.createLogger({
   level: "verbose",
   transports: [new winston.transports.Console()],
-  format: winston.format.combine(winston.format.prettyPrint()),
+  format: winston.format.prettyPrint(),
+});
+
+export const exception = winston.createLogger({
+  level: "verbose",
+  transports: [new winston.transports.Console()],
+  exceptionHandlers: [new winston.transports.Console()],
+  format: winston.format.prettyPrint(),
+  exitOnError: false,
 });

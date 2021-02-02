@@ -5,8 +5,8 @@ import { Accept } from "./commands/accept";
 
 import { Module } from "../../interfaces/module";
 
-export const WelcomeGate: Module = {
-  title: "Welcome Gating",
+export const UserScreening: Module = {
+  title: "User Screening",
   description: i18n.__(
     "A collection of tools to gate a community against bots, trolls, and other external threats.",
   ),

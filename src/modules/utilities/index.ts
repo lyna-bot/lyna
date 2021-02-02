@@ -6,6 +6,7 @@ import { registerCommands } from "../../lib/commands";
 
 import { Avatar } from "./commands/avatar";
 import { Ping } from "./commands/ping";
+import { Prefix } from "./commands/prefix";
 
 import { Module } from "../../interfaces/module";
 
@@ -15,6 +16,6 @@ export const Utilities: Module = {
     "Miscellaneous tools and functionality useful in the day-to-day operation of the bot.",
   ),
   async init() {
-    registerCommands([Avatar, Ping]);
+    registerCommands([Avatar, Ping, Prefix]);
   },
 };

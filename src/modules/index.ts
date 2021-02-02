@@ -1,2 +1,2 @@
 export * from './utilities';
-export * from './welcome-gate';
+export * from './user-screening';

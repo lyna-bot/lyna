@@ -13,15 +13,17 @@ import * as ModuleDefinitions from "./modules";
  *
  * Here, we log into Discord and set up anything else the bot needs to run
  * globally, then start listening for commands.
- *
- * @module
  */
 export default (): void => {
   login();
   registerModules();
 
   ClientInstance.on("message", (message: Message) => {
-    dispatchCommand(message);
+    try {
+      dispatchCommand(message);
+    } catch (error) {
+      logger.error(error);
+    }
   });
 };
 

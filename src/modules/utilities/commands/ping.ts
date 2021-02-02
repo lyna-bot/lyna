@@ -10,13 +10,14 @@ import { Command } from "../../../interfaces/command";
  * @namespace Lyna
  * @name Ping
  *
- * The simplest possible command. Simply responds to its command with "Ping!"
+ * Checks whether the bot is online and connected to Discord correctly.
  *
  * Usage: {p}ping
  */
 export const Ping: Command = {
   trigger: "ping",
-  description: i18n.__("Ping!"),
+  description: i18n.__("Checks whether the bot is online and connected to Discord correctly."),
+  usage: '',
   async execute(message) {
     await message.channel.send(`Pinging...`).then((sent) => {
       sent.edit(

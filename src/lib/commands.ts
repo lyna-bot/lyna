@@ -1,29 +1,38 @@
 import { Message } from "discord.js";
 
-import { CommandPrefix, Commands } from "./core";
+import { debug, logger } from "./logger";
+import { Commands } from "./core";
 import { i18n } from "./i18n";
-import { logger } from "./logger";
 import { parseArguments } from "./arguments";
 
 import { ArgumentList } from "../interfaces/argument";
 import { Command } from "../interfaces/command";
+import { botShouldRespond } from "./botPrefix";
 
 export const dispatchCommand = async (message: Message): Promise<void> => {
-  if (!message.content.startsWith(CommandPrefix) || message.author.bot) return;
-
-  const args: ArgumentList = parseArguments(message);
-
-  if (!Commands.has(args.trigger)) return;
-
   try {
-    Commands.get(args.trigger)?.execute(message, args);
+    if (!botShouldRespond(message)) return;
 
-    logger.verbose(
-      i18n.__(`Command executed: {{ trigger }}`, { trigger: args.trigger }),
-    );
+    const args: ArgumentList = parseArguments(message);
+
+    if (args.trigger && !Commands.has(args.trigger)) {
+      debug.info([args, message.content, message.author.username]);
+      logger.info(`Unrecognised command: ${args.trigger}`);
+      return;
+    }
+
+    Commands.get(args.trigger)
+      ?.execute(message, args)
+      .then(() => {
+        logger.verbose(
+          i18n.__(`Command executed: {{ trigger }}`, { trigger: args.trigger }),
+        );
+      });
   } catch (error) {
     logger.error(error);
-    message.reply(i18n.__("there was an error when executing that command."));
+    message.reply(
+      i18n.__(`there was an error when executing that command: ${error}`),
+    );
   }
 };
 
