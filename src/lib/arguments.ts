@@ -6,7 +6,6 @@ import { Argument, ArgumentList } from "../interfaces/argument";
 import { mentionOrPrefix } from "./botPrefix";
 
 const USER_MENTION = /^<@!?(\d+)>$/;
-const USER_DISCRIMINATOR = /^@?(.*)#(\d{4})$/;
 
 export const parseArguments = (message: Message): ArgumentList => {
   const rawArgs: string[] = getRawArguments(message);

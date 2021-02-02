@@ -1,8 +1,8 @@
 import { Message } from "discord.js";
 
-import { debug, logger } from "./logger";
 import { Commands } from "./core";
 import { i18n } from "./i18n";
+import { logger } from "./logger";
 import { parseArguments } from "./arguments";
 
 import { ArgumentList } from "../interfaces/argument";
@@ -16,7 +16,6 @@ export const dispatchCommand = async (message: Message): Promise<void> => {
     const args: ArgumentList = parseArguments(message);
 
     if (args.trigger && !Commands.has(args.trigger)) {
-      debug.info([args, message.content, message.author.username]);
       logger.info(`Unrecognised command: ${args.trigger}`);
       return;
     }

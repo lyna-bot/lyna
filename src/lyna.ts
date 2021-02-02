@@ -1,4 +1,4 @@
-import { Message } from "discord.js";
+import { Client, Guild, Message, RateLimitData, TextChannel } from "discord.js";
 import { oneLineCommaListsAnd } from "common-tags";
 
 import { ClientInstance, Modules } from "./lib/core";
@@ -25,6 +25,24 @@ export default (): void => {
       logger.error(error);
     }
   });
+
+  ClientInstance.on("ready", async () => {
+    try {
+      if (process.env.SYSTEM_LOG_CHANNEL) {
+        const sysLogChannel = ClientInstance.channels?.cache?.get(
+          process.env.SYSTEM_LOG_CHANNEL,
+        ) as TextChannel;
+
+        sysLogChannel.send("Lyna is now online.");
+      }
+    } catch (error) {
+      logger.error(error);
+    }
+  });
+
+  ClientInstance.on("warn", (warning: string) => logger.warn(warning));
+  ClientInstance.on("error", (error: Error) => logger.error(error));
+  ClientInstance.on("rateLimit", (rateLimitInfo: RateLimitData) => logger.error(rateLimitInfo));
 };
 
 const login = () => {
@@ -32,7 +50,7 @@ const login = () => {
   ClientInstance.login(process.env.DISCORD_BOT_TOKEN);
 
   ClientInstance.once("ready", () => {
-    logger.info(i18n.__("Lyna is now standing guard."));
+    logger.info(i18n.__(`Connected successfully. Lyna is now standing guard.`));
   });
 };
 
