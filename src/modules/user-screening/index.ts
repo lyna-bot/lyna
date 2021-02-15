@@ -10,7 +10,11 @@ export const UserScreening: Module = {
   description: i18n.__(
     "A collection of tools to gate a community against bots, trolls, and other external threats.",
   ),
+  commands: [Accept],
+
   async init() {
-    registerCommands([Accept]);
+    if (this.commands) {
+      registerCommands(this.commands);
+    }
   },
 };

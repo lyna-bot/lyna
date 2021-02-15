@@ -10,5 +10,7 @@
 	"Pong!": "Pong!",
 	"Command executed: {{ trigger }}": "Command executed: {{ trigger }}",
 	"This command has not yet been implemented.": "This command has not yet been implemented.",
-	"I'll respond if you start a message with `!!` or <@!790784202274635796>, plus a command I know about. For example, you can trigger this message with **!!prefix** or **<@!790784202274635796> prefix.**": "I'll respond if you start a message with `!!` or <@!790784202274635796>, plus a command I know about. For example, you can trigger this message with **!!prefix** or **<@!790784202274635796> prefix.**"
+	"I'll respond if you start a message with `!!` or <@!790784202274635796>, plus a command I know about. For example, you can trigger this message with **!!prefix** or **<@!790784202274635796> prefix.**": "I'll respond if you start a message with `!!` or <@!790784202274635796>, plus a command I know about. For example, you can trigger this message with **!!prefix** or **<@!790784202274635796> prefix.**",
+	"Displays a user's avatar.": "Displays a user's avatar.",
+	"I'll respond if you start a message with `{{ prefix }}` or <@!{{ botID }}>, plus a command I know about. For example, you can trigger this message with **{{ prefix }}prefix** or **<@!{{ botID }}> prefix.**": "I'll respond if you start a message with `{{ prefix }}` or <@!{{ botID }}>, plus a command I know about. For example, you can trigger this message with **{{ prefix }}prefix** or **<@!{{ botID }}> prefix.**"
 }
