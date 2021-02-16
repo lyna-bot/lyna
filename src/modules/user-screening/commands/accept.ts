@@ -4,16 +4,6 @@ import { i18n } from "../../../lib/i18n";
 
 import { Command } from "../../../interfaces/command";
 
-/**
- * @module
- * @namespace Lyna
- * @name Accept
- *
- * Accepts a user into the community, giving them the roles they need
- * to access the wider server.
- *
- * Usage: {p}accept <user> <roles>
- */
 export const Accept: Command = {
   trigger: "accept",
   usage: "<user> [arguments] [chosen roles]",

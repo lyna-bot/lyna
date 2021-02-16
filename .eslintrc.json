@@ -3,6 +3,7 @@
     "es2021": true,
     "node": true
   },
+  "plugins": ["eslint-plugin-tsdoc"],
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
@@ -23,6 +24,7 @@
         "memberSyntaxSortOrder": ["none", "all", "multiple", "single"],
         "allowSeparatedGroups": true
       }
-    ]
+    ],
+    "tsdoc/syntax": "warn"
   }
 }

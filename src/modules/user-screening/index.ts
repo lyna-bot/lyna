@@ -1,3 +1,5 @@
+import { oneLine } from "common-tags";
+
 import { i18n } from "../../lib/i18n";
 import { registerCommands } from "../../lib/commands";
 
@@ -7,10 +9,15 @@ import { Module } from "../../interfaces/module";
 
 export const UserScreening: Module = {
   title: "User Screening",
-  description: i18n.__(
-    "A collection of tools to gate a community against bots, trolls, and other external threats.",
-  ),
+  description: i18n.__(oneLine`
+    A collection of tools to gate a community against bots, trolls, and other
+    external threats.
+  `),
+  commands: [Accept],
+
   async init() {
-    registerCommands([Accept]);
+    if (this.commands) {
+      registerCommands(this.commands);
+    }
   },
 };

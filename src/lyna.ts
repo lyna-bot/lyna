@@ -1,4 +1,4 @@
-import { Client, Guild, Message, RateLimitData, TextChannel } from "discord.js";
+import { Message, RateLimitData, TextChannel } from "discord.js";
 import { oneLineCommaListsAnd } from "common-tags";
 
 import { ClientInstance, Modules } from "./lib/core";
@@ -9,12 +9,10 @@ import { logger } from "./lib/logger";
 import * as ModuleDefinitions from "./modules";
 
 /**
- * The main entry point for Lyna.
- *
- * Here, we log into Discord and set up anything else the bot needs to run
- * globally, then start listening for commands.
+ * Starts up Lyna, performing all tasks required to initialise an instance of
+ * the bot, connect to Discord, and start listening for input.
  */
-export default (): void => {
+export const Lyna = (): void => {
   login();
   registerModules();
 
@@ -45,6 +43,10 @@ export default (): void => {
   ClientInstance.on("rateLimit", (rateLimitInfo: RateLimitData) => logger.error(rateLimitInfo));
 };
 
+/**
+ * Log into Discord. This function wraps Discord.js's `login` function with some
+ * logging for convenience.
+ */
 const login = () => {
   logger.info(i18n.__("Connecting to Discord..."));
   ClientInstance.login(process.env.DISCORD_BOT_TOKEN);
@@ -54,6 +56,10 @@ const login = () => {
   });
 };
 
+/**
+ * Loads all the modules in the `modules/` folder and initialises them, allowing
+ * them to be used with the bot.
+ */
 const registerModules = () => {
   Object.entries(ModuleDefinitions).forEach(([, module]) => {
     Modules.set(module.title, module);

@@ -5,15 +5,6 @@ import { i18n } from "../../../lib/i18n";
 
 import { Command } from "../../../interfaces/command";
 
-/**
- * @module
- * @namespace Lyna
- * @name Avatar
- *
- * Displays a user's avatar.
- *
- * Usage: {p}avatar <user>
- */
 export const Avatar: Command = {
   trigger: "avatar",
   usage: "<user>",
