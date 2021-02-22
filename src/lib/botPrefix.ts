@@ -60,6 +60,6 @@ const prefixRegex = (): RegExp => {
  * allows the commond prefix to contain characters that would otherwise be
  * meaningful in a regular expression.
  *
- * @param str The string to escape
+ * @param str - The string to escape
  */
 const escapeRegex = (str: string) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
