@@ -5,7 +5,7 @@
   "main": "src/index.ts",
   "type": "module",
   "engines": {
-    "node": "15.8.0"
+    "node": "16.1.0"
   },
   "scripts": {
     "start": "node --loader ts-node/esm --experimental-specifier-resolution=node .",
