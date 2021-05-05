@@ -21,6 +21,7 @@
     "url": "git@github.com:lyna-bot/lyna.git"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "common-tags": "1.8.0",
     "discord.js": "12.5.3",
     "dotenv": "8.5.1",
