@@ -32,7 +32,7 @@
     "common-tags": "1.8.0",
     "discord.js": "12.5.3",
     "dotenv": "9.0.1",
-    "i18n": "0.13.2",
+    "i18n": "0.13.3",
     "ts-node": "9.1.1",
     "typescript": "4.2.4",
     "utf-8-validate": "5.0.5",
