@@ -9,7 +9,7 @@ import { Module } from "../interfaces/module";
  */
 export const ClientInstance = new Client({
   ws: { intents: Intents.ALL },
-  presence: { activity: { type: 'WATCHING', name: "over the Crystarium" } }
+  presence: { activity: { type: "WATCHING", name: "over the Crystarium" } },
 });
 
 /**

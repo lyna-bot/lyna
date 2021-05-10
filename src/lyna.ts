@@ -40,7 +40,9 @@ export const Lyna = (): void => {
 
   ClientInstance.on("warn", (warning: string) => logger.warn(warning));
   ClientInstance.on("error", (error: Error) => logger.error(error));
-  ClientInstance.on("rateLimit", (rateLimitInfo: RateLimitData) => logger.error(rateLimitInfo));
+  ClientInstance.on("rateLimit", (rateLimitInfo: RateLimitData) =>
+    logger.error(rateLimitInfo),
+  );
 };
 
 /**

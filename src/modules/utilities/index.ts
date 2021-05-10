@@ -13,8 +13,7 @@ export const Utilities: Module = {
   title: "Utilities",
   description: i18n.__(oneLine`
     Miscellaneous tools and functionality useful in the day-to-day operation of
-    the bot.`
-  ),
+    the bot.`),
   commands: [Avatar, Ping, Prefix],
 
   async init() {
