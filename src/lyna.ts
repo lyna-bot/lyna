@@ -1,10 +1,14 @@
-import { Message, RateLimitData, TextChannel } from "discord.js";
+import { RateLimitData, TextChannel } from "discord.js";
 import { oneLineCommaListsAnd } from "common-tags";
 
-import { ClientInstance, Modules } from "./lib/core";
-import { dispatchCommand } from "./lib/commands";
+import { ClientInstance, Commands, Modules } from "./lib/core";
+import {
+  dispatchCommand,
+  registerCommand,
+  registerCommands,
+} from "./lib/commands";
 import { i18n } from "./lib/i18n";
-import { logger } from "./lib/logger";
+import { debug, logger } from "./lib/logger";
 
 import * as ModuleDefinitions from "./modules";
 
@@ -14,36 +18,76 @@ import * as ModuleDefinitions from "./modules";
  */
 export const Lyna = (): void => {
   login();
-  registerModules();
-
-  ClientInstance.on("message", (message: Message) => {
-    try {
-      dispatchCommand(message);
-    } catch (error) {
-      logger.error(error);
-    }
-  });
 
   ClientInstance.on("ready", async () => {
     try {
+      registerModules();
+
       if (process.env.SYSTEM_LOG_CHANNEL) {
         const sysLogChannel = ClientInstance.channels?.cache?.get(
           process.env.SYSTEM_LOG_CHANNEL,
         ) as TextChannel;
-
         sysLogChannel.send("Lyna is now online.");
       }
     } catch (error) {
-      logger.error(error);
+      logger.error(`Error when making client ready: ${JSON.stringify(error)}`);
+      debug.debug(error);
     }
   });
 
-  ClientInstance.on("warn", (warning: string) => logger.warn(warning));
-  ClientInstance.on("error", (error: Error) => logger.error(error));
+  ClientInstance.on("interaction", (interaction) => {
+    // If the interaction isn't a slash command, return
+    if (!interaction.isCommand()) return;
+
+    try {
+      dispatchCommand(interaction);
+    } catch (error) {
+      logger.error(
+        `Interaction processing error for ${
+          interaction.commandName
+        }: ${JSON.stringify(error)}`,
+      );
+    }
+  });
+
+  ClientInstance.on("debug", (message: string) => debug.verbose(message));
+  ClientInstance.on("warn", (warning: string) =>
+    logger.warn(JSON.stringify(warning)),
+  );
+  ClientInstance.on("error", (error: Error) =>
+    logger.error(JSON.stringify(error)),
+  );
   ClientInstance.on("rateLimit", (rateLimitInfo: RateLimitData) =>
-    logger.error(rateLimitInfo),
+    logger.error(JSON.stringify(rateLimitInfo)),
   );
 };
+
+ClientInstance.on("applicationCommandCreate", async (command) => {
+  logger.verbose(
+    oneLineCommaListsAnd`
+      ${i18n.__("Registered command:")}
+      ${command.name}
+    `,
+  );
+});
+
+ClientInstance.on("applicationCommandUpdate", async (command) => {
+  logger.verbose(
+    oneLineCommaListsAnd`
+      ${i18n.__("Updated command:")}
+      ${command?.name}
+    `,
+  );
+});
+
+ClientInstance.on("applicationCommandDelete", async (command) => {
+  logger.verbose(
+    oneLineCommaListsAnd`
+      ${i18n.__("Deleted command:")}
+      ${command.name}
+    `,
+  );
+});
 
 /**
  * Log into Discord. This function wraps Discord.js's `login` function with some
@@ -53,7 +97,7 @@ const login = () => {
   logger.info(i18n.__("Connecting to Discord..."));
   ClientInstance.login(process.env.DISCORD_BOT_TOKEN);
 
-  ClientInstance.once("ready", () => {
+  ClientInstance.on("ready", () => {
     logger.info(i18n.__(`Connected successfully. Lyna is now standing guard.`));
   });
 };
@@ -64,14 +108,14 @@ const login = () => {
  */
 const registerModules = () => {
   Object.entries(ModuleDefinitions).forEach(([, module]) => {
-    Modules.set(module.title, module);
+    if (module.commands) {
+      module!.commands.forEach((cmd) => {
+        registerCommand(cmd.command.name, cmd);
+      });
+    }
+
     module.init();
   });
 
-  logger.verbose(
-    oneLineCommaListsAnd`
-      ${i18n.__("Registered modules:")}
-      ${Modules.keyArray()}
-    `,
-  );
+  registerCommands();
 };

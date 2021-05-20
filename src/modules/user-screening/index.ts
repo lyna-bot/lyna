@@ -1,7 +1,6 @@
 import { oneLine } from "common-tags";
 
 import { i18n } from "../../lib/i18n";
-import { registerCommands } from "../../lib/commands";
 
 import { Accept } from "./commands/accept";
 
@@ -15,9 +14,5 @@ export const UserScreening: Module = {
   `),
   commands: [Accept],
 
-  async init() {
-    if (this.commands) {
-      registerCommands(this.commands);
-    }
-  },
+  async init() {},
 };

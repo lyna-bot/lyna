@@ -8,12 +8,30 @@ import { Command } from "../../../interfaces/command";
 import { logger } from "../../../lib/logger";
 
 export const Whois: Command = {
-  trigger: "whois",
-  usage: "<world> <character name>",
-  description: i18n.__(oneLine`
-    Fetches basic info for a Final Fantasy XIV character.
-  `),
-  async execute(message, args) {
+  command: {
+    name: "whois",
+    description: i18n.__(oneLine`
+      Fetches basic info for a Final Fantasy XIV character.
+    `),
+    options: [
+      {
+        name: "server",
+        type: "STRING",
+        description:
+          "The Final Fantasy XIV server on which the character is located",
+        // choices: []
+        required: true,
+      },
+      {
+        name: "character",
+        type: "STRING",
+        description: "The character's full name",
+        required: true,
+      },
+    ],
+  },
+
+  async execute(interaction) {
     const responseMessage = await message.channel.send(`Working...`);
     message.channel.startTyping();
 

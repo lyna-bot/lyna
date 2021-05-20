@@ -1,15 +1,11 @@
-import { Message } from "discord.js";
-
-import { ArgumentList } from "./argument";
+import { ApplicationCommandData, CommandInteraction } from "discord.js";
 
 /**
  * A single command, including details to allow the command to be
  * self-documenting and define sensible defaults.
  */
 export interface Command {
-  trigger: string;
-  description: string;
-  usage: string;
+  command: ApplicationCommandData;
   execute: CommandFunc;
 }
 
@@ -17,5 +13,5 @@ export interface Command {
  * The command that is executed when a command is triggered.
  */
 interface CommandFunc {
-  (message: Message, args?: ArgumentList): Promise<Message | void>;
+  (interaction: CommandInteraction): Promise<void>;
 }

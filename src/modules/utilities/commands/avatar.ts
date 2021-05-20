@@ -6,20 +6,23 @@ import { i18n } from "../../../lib/i18n";
 import { Command } from "../../../interfaces/command";
 
 export const Avatar: Command = {
-  trigger: "avatar",
-  usage: "<user>",
-  description: i18n.__(oneLine`
+  command: {
+    name: "avatar",
+    description: i18n.__(oneLine`
     Displays a user's avatar.
   `),
+    options: [
+      {
+        name: "user",
+        type: "USER",
+        description: "The user whose avatar should be shown",
+        required: true,
+      },
+    ],
+  },
 
-  async execute(message, args) {
-    let user: User;
-
-    if (args?.arguments && args.arguments.length > 0) {
-      user = args.arguments[0] as User;
-    } else {
-      user = message.author;
-    }
+  async execute(interaction) {
+    const user: User = interaction.options[0].user!;
 
     if (user.username) {
       const avatarEmbed = new MessageEmbed()
@@ -31,15 +34,14 @@ export const Avatar: Command = {
           }),
         );
 
-      return await message.channel.send(avatarEmbed);
+      return await interaction.reply(avatarEmbed);
     } else {
-      return await message.reply(
-        i18n.__(`please give me a user whose avatar you'd like to see.`),
+      return await interaction.reply(
+        i18n.__(`Please give me a user whose avatar you'd like to see.`),
+        {
+          ephemeral: true,
+        },
       );
     }
-
-    throw Error(
-      "No user provided for {p}avatar command, and none could be calculated.",
-    );
   },
 };

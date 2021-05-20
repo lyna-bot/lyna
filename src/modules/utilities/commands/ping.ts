@@ -1,27 +1,33 @@
+import { Message } from "discord.js";
 import { oneLine } from "common-tags";
 
 import { ClientInstance } from "../../../lib/core";
 import { i18n } from "../../../lib/i18n";
+import { debug, logger } from "../../../lib/logger";
 
 import { Command } from "../../../interfaces/command";
 
 export const Ping: Command = {
-  trigger: "ping",
-  description: i18n.__(
-    "Checks whether the bot is online and connected to Discord correctly.",
-  ),
-  usage: "",
+  command: {
+    name: "ping",
+    description: i18n.__(
+      "Checks whether the bot is online and connected to Discord correctly.",
+    ),
+    options: [],
+  },
 
-  async execute(message) {
-    await message.channel.send(`Pinging...`).then((sent) => {
-      sent.edit(
+  async execute(interaction) {
+    try {
+      await interaction.defer(true);
+
+      return interaction.followUp(
         oneLine`
-          ${i18n.__("Pong!")}
-          (WebSocket: ${ClientInstance.ws.ping}ms; RTT: ${
-          sent.createdTimestamp - message.createdTimestamp
-        }ms)
+        ${i18n.__("Pong!")}
+        (WebSocket: ${ClientInstance.ws.ping}ms)
         `,
       );
-    });
+    } catch (message) {
+      debug.error(`Error executing ping: ${message}`);
+    }
   },
 };

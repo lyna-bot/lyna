@@ -1,7 +1,6 @@
 import { oneLine } from "common-tags";
 
 import { i18n } from "../../lib/i18n";
-import { registerCommands } from "../../lib/commands";
 
 import { Whois } from "./commands/whois";
 
@@ -17,9 +16,5 @@ export const FFXIV: Module = {
   `),
   commands: [Whois],
 
-  async init() {
-    if (this.commands) {
-      registerCommands(this.commands);
-    }
-  },
+  async init() {},
 };

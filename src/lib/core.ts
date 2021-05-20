@@ -8,9 +8,9 @@ import { Module } from "../interfaces/module";
  * details and fetch data from Discord.
  */
 export const ClientInstance = new Client({
-  ws: { intents: Intents.ALL },
+  intents: Intents.ALL,
   partials: ["CHANNEL", "GUILD_MEMBER", "MESSAGE", "REACTION", "USER"],
-  presence: { activity: { type: "WATCHING", name: "over the Crystarium" } },
+  presence: { activities: [{ type: "WATCHING", name: "over the Crystarium" }] },
 });
 
 /**

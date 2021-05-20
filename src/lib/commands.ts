@@ -1,8 +1,8 @@
-import { Message } from "discord.js";
+import { Interaction } from "discord.js";
 
-import { Commands } from "./core";
+import { ClientInstance, Commands } from "./core";
 import { i18n } from "./i18n";
-import { logger } from "./logger";
+import { debug, logger } from "./logger";
 import { parseArguments } from "./arguments";
 
 import { ArgumentList } from "../interfaces/argument";
@@ -18,29 +18,22 @@ import { botShouldRespond } from "./botPrefix";
  * we want to parse.
  * @returns The result of the command.
  */
-export const dispatchCommand = async (message: Message): Promise<void> => {
+export const dispatchCommand = async (
+  interaction: Interaction,
+): Promise<void> => {
   try {
-    if (!botShouldRespond(message)) return;
+    if (!interaction.isCommand()) return;
 
-    const args: ArgumentList = parseArguments(message);
+    await Commands.get(interaction.commandName)?.execute(interaction);
 
-    if (args.trigger && !Commands.has(args.trigger)) {
-      logger.info(`Unrecognised command: ${args.trigger}`);
-      return;
-    }
-
-    Commands.get(args.trigger)
-      ?.execute(message, args)
-      .then(() => {
-        logger.verbose(
-          i18n.__(`Command executed: {{ trigger }}`, { trigger: args.trigger }),
-        );
-      });
-  } catch (error) {
-    logger.error(error);
-    message.reply(
-      i18n.__(`there was an error when executing that command: ${error}`),
+    logger.verbose(
+      i18n.__(`Command executed: {{ trigger }}`, {
+        trigger: interaction.commandName,
+      }),
     );
+  } catch (error) {
+    logger.error(`Error dispatching command: ${error}`);
+    debug.error(error);
   }
 };
 
@@ -50,10 +43,14 @@ export const dispatchCommand = async (message: Message): Promise<void> => {
  *
  * @param commands - A list of modules, each of which constitutes a command
  */
-export const registerCommands = (commands: Command[]): void => {
-  Object.entries(commands).forEach(([, cmd]) => {
-    registerCommand(cmd.trigger.toLowerCase(), cmd);
-  });
+export const registerCommands = async (): Promise<void> => {
+  const discordCommands = await ClientInstance.guilds.cache
+    .get("660151141811617802")
+    ?.commands.set(Commands.map((cmd) => cmd.command));
+
+  logger.verbose(
+    `Registered commands: ${discordCommands?.map((command) => command.name)}`,
+  );
 };
 
 /**
@@ -71,8 +68,6 @@ export const registerCommand = (trigger: string, command: Command): void => {
     } else {
       Commands.set(trigger, command);
     }
-
-    logger.debug(`Registered command: ${trigger}`);
   } catch (error) {
     logger.error(error);
   }
