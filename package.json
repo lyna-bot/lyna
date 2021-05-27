@@ -35,7 +35,7 @@
     "dotenv": "10.0.0",
     "i18n": "0.13.3",
     "ts-node": "10.0.0",
-    "typescript": "4.2.4",
+    "typescript": "4.3.2",
     "utf-8-validate": "5.0.5",
     "winston": "3.3.3",
     "zlib-sync": "0.1.7"
