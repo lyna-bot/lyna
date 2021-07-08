@@ -23,6 +23,7 @@
   "dependencies": {
     "@types/common-tags": "1.8.0",
     "@types/i18n": "0.13.1",
+    "@types/ioredis": "^4.26.5",
     "@types/node": "16.0.0",
     "@types/ws": "7.4.6",
     "@typescript-eslint/eslint-plugin": "4.28.2",
@@ -44,7 +45,6 @@
   "devDependencies": {
     "@commitlint/cli": "12.1.4",
     "@commitlint/config-conventional": "12.1.4",
-    "@types/ioredis": "^4.26.5",
     "cz-conventional-changelog": "3.3.0",
     "eslint": "7.30.0",
     "eslint-config-prettier": "8.3.0",
