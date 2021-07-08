@@ -19,13 +19,10 @@ export const ClientInstance = new Client({
  * Our primary Redis instance, mostly used for analytics and similar
  * functionality.
  */
-export const RedisInstance = new Redis({
-  port: envGet("REDIS_PORT").default("6379").asInt(),
-  host: envGet("REDIS_HOST").required().asString(),
-  username: envGet("REDIS_USERNAME").asString(),
-  password: envGet("REDIS_PASSWORD").asString(),
-  enableAutoPipelining: true,
-});
+export const RedisInstance = new Redis(
+  envGet("REDIS_URL").required().asString(),
+  { enableAutoPipelining: true },
+);
 
 /**
  * A list of modules registered with the bot. This is populated when the bot
