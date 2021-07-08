@@ -3,8 +3,9 @@
   "conventionalCommits.scopes": [
     "core",
     "accept",
-    "utilities",
+    "analytics",
+    "deps",
     "user-screening",
-    "deps"
+    "utilities"
   ]
 }
