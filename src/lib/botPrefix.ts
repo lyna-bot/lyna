@@ -1,6 +1,7 @@
 import { Message } from "discord.js";
 
 import { ClientInstance } from "./core";
+import { envGet } from "./env";
 
 /**
  * The prefix the bot should respond to - when a user sends a message prefixed
@@ -12,7 +13,7 @@ import { ClientInstance } from "./core";
  * however, it should ideally be configurable on a per-guild basis too, and
  * respond to that prefix instead of a global one.
  */
-export const commandPrefix = process.env.COMMAND_PREFIX ?? "!!";
+export const commandPrefix = envGet("COMMAND_PREFIX").default("!!").asString();
 
 /**
  * Determines whether a bot should respond to a given message. This performs all

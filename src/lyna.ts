@@ -3,6 +3,7 @@ import { oneLineCommaListsAnd } from "common-tags";
 
 import { ClientInstance, Modules } from "./lib/core";
 import { dispatchCommand } from "./lib/commands";
+import { envGet } from "./lib/env";
 import { i18n } from "./lib/i18n";
 import { logger } from "./lib/logger";
 
@@ -26,9 +27,11 @@ export const Lyna = (): void => {
 
   ClientInstance.on("ready", async () => {
     try {
-      if (process.env.SYSTEM_LOG_CHANNEL) {
+      const sysLogChannelId = envGet("SYSTEM_LOG_CHANNEL").asString();
+
+      if (sysLogChannelId) {
         const sysLogChannel = ClientInstance.channels?.cache?.get(
-          process.env.SYSTEM_LOG_CHANNEL,
+          sysLogChannelId,
         ) as TextChannel;
 
         sysLogChannel.send("Lyna is now online.");
@@ -51,7 +54,7 @@ export const Lyna = (): void => {
  */
 const login = () => {
   logger.info(i18n.__("Connecting to Discord..."));
-  ClientInstance.login(process.env.DISCORD_BOT_TOKEN);
+  ClientInstance.login(envGet("DISCORD_BOT_TOKEN").required().asString());
 
   ClientInstance.once("ready", () => {
     logger.info(i18n.__(`Connected successfully. Lyna is now standing guard.`));
