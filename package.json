@@ -5,7 +5,7 @@
   "main": "src/index.ts",
   "type": "module",
   "engines": {
-    "node": "16.1.0"
+    "node": "16.4.2"
   },
   "scripts": {
     "start": "node --loader ts-node/esm --experimental-specifier-resolution=node .",
@@ -14,14 +14,13 @@
     "semantic-release": "semantic-release"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Emily Hicks",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git@github.com:lyna-bot/lyna.git"
   },
   "dependencies": {
-    "@elastic/elasticsearch": "7.13.0",
     "@types/common-tags": "1.8.0",
     "@types/i18n": "0.13.1",
     "@types/node": "16.0.0",

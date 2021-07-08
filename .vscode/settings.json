@@ -1,6 +1,10 @@
 {
   "typescript.tsdk": "node_modules/typescript/lib",
   "conventionalCommits.scopes": [
-    "FFXIV"
+    "core",
+    "accept",
+    "utilities",
+    "user-screening",
+    "deps"
   ]
 }

@@ -37,9 +37,5 @@ export const Avatar: Command = {
         i18n.__(`please give me a user whose avatar you'd like to see.`),
       );
     }
-
-    throw Error(
-      "No user provided for {p}avatar command, and none could be calculated.",
-    );
   },
 };
