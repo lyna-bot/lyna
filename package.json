@@ -30,7 +30,7 @@
     "@typescript-eslint/parser": "4.33.0",
     "axios": "0.21.2",
     "bufferutil": "4.0.3",
-    "common-tags": "1.8.0",
+    "common-tags": "1.8.2",
     "discord.js": "12.5.3",
     "dotenv": "10.0.0",
     "env-var": "^7.0.1",
