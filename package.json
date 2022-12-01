@@ -31,7 +31,7 @@
     "axios": "0.25.0",
     "bufferutil": "4.0.6",
     "common-tags": "1.8.2",
-    "discord.js": "12.5.3",
+    "discord.js": "14.7.1",
     "dotenv": "16.0.0",
     "env-var": "^7.1.1",
     "i18n": "0.14.1",
